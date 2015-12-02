@@ -64,6 +64,15 @@ public class Player {
     
     private void applyPrize(Monster m){
         
+        CardDealer dealer;
+        int nlevels=m.getLevelsGained();
+        this.incrementLevels(nlevels);
+        int ntreasures=m.getTreasuresGained();
+        
+        if(ntreasures>0){
+            dealer=CardDealer.getInstance();
+        }
+        
     }
     
     private void applyBadConsequence(Monster m){
@@ -71,8 +80,20 @@ public class Player {
     }
     
     private boolean canMakeTreasureVisible(Treasure t){
-        return false;
+        boolean puede=true;
+        int j=0;
         
+        for(int i=0;i<hiddenTreasures.size() && puede==true ;i++){
+            if(hiddenTreasures.get(i).getType()==t.getType() )
+                if(t.getType()==TreasureKind.onehand)
+                    j++;
+                else
+                    puede=false;
+            if(j==2)
+                puede=false;
+        }
+        
+        return puede;
     }
     
     private int howManyVisibleTreasures(TreasureKind tKind){
@@ -87,7 +108,7 @@ public class Player {
         
     }
     
-    private void dielfNoTreasures(){
+    private void dieIfNoTreasures(){
         
         if(visibleTreasures.size()==0 && hiddenTreasures.size()==0)
             dead=true;
@@ -107,13 +128,41 @@ public class Player {
     }
     
     public CombatResult combat(Monster m){
-        return null;
+        CombatResult cr;
+        int myLevel=getCombatLevel();
+        int monsterLevel=m.getCombatLevel();
+        
+        if(myLevel>monsterLevel){
+            this.applyPrize(m);
+            if(level>=MAXLEVEL)
+                cr=CombatResult.WINGAME;
+            else
+                cr=CombatResult.WIN;
+                
+        }
+        else{
+            this.applyBadConsequence(m);
+            cr=CombatResult.LOSE;
+        }
+        return cr;
     }
     
     public void makeTreasureVisible(Treasure t){
+        
+            boolean canI=canMakeTreasureVisible(t);
+            
+            if(canI){
+                visibleTreasures.add(t);
+                hiddenTreasures.remove(t);
+            }
     }
     
     public void discardVisibleTreasure(Treasure t){
+        visibleTreasures.remove(t);
+        if(pendingBadConsequence!=null && !pendingBadConsequence.isEmpty())
+            pendingBadConsequence.substractVisibleTreasure(t);
+        
+        dieIfNoTreasures();
         
     }
     
@@ -131,6 +180,25 @@ public class Player {
     }
     
     public void initTreasures(){
+        CardDealer dealer=CardDealer.getInstance();
+        Dice dice=Dice.getInstance();
+        Treasure treasure;
+        int number;
+        
+        this.bringToLife();
+        treasure=dealer.nextTreasure();
+        hiddenTreasures.add(treasure);
+        number=dice.nextNumber();
+        
+        if(number>1){
+            treasure=dealer.nextTreasure();
+            hiddenTreasures.add(treasure);
+        }
+        
+        if(number==6){
+            treasure=dealer.nextTreasure();
+            hiddenTreasures.add(treasure);
+        }
         
     }
     
@@ -139,7 +207,20 @@ public class Player {
     }
     
     public Treasure stealTreasure(){
-        return null;
+       Treasure treasure=null;   
+       boolean canYou;
+       boolean canI=this.canSteal;
+       
+       if(canI){
+           canYou=enemy.canYouGiveMeATreasure();
+           if(canYou){
+               treasure=enemy.giveMeATreasure();
+               hiddenTreasures.add(treasure);
+               this.haveStolen();
+                
+           }
+       }
+        return treasure;
     }
     
     public void setEnemy(Player enem){
@@ -148,7 +229,8 @@ public class Player {
     }
     
     private Treasure giveMeATreasure(){
-        return null;
+        int i=(int) (Math.random()*hiddenTreasures.size())-1;
+        return hiddenTreasures.get(i);
     }
     
     public boolean canSteal(){
@@ -164,6 +246,16 @@ public class Player {
     }
     
     public void discardAllTreasures(){
+        Treasure treasure;
+        
+        for(Treasure t: visibleTreasures ){
+            this.discardVisibleTreasure(t);
+        }
+        
+        for(Treasure t: hiddenTreasures){
+            this.discardHiddenTreasure(t);
+            
+        }
         
     }
     

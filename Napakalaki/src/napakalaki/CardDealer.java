@@ -179,11 +179,29 @@ public class CardDealer {
     }
     
     public Treasure nextTreasure(){
-        return null;
+        Treasure aux;
+        
+        if(unusedTreasures.isEmpty()){
+            unusedTreasures=usedTreasures;
+            usedTreasures=null;
+            shuffleTreasures();
+        }
+        aux=unusedTreasures.get(unusedTreasures.size()-1);
+        unusedTreasures.remove(unusedTreasures.size()-1);
+        return aux;
     }
     
     public Monster nextMonster(){
-        return null;
+        Monster aux;
+        
+        if(unusedMonsters.isEmpty()){
+            unusedMonsters=usedMonsters;
+            usedMonsters=null;
+            shuffleMonsters();
+        }
+        aux=unusedMonsters.get(unusedMonsters.size()-1);
+        unusedMonsters.remove(unusedMonsters.size()-1);
+        return aux;
     }
     
     public void giveTreasureBack(Treasure t){
@@ -198,6 +216,8 @@ public class CardDealer {
     }
     
     public void initCards(){
+        initTreasureCardDeck();
+        initMonsterCardDeck();
         
     }
        

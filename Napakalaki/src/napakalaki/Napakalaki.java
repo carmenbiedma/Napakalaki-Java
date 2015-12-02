@@ -20,21 +20,46 @@ public class Napakalaki {
     private ArrayList<Player> players= new ArrayList();
     
     
-    private Napakalaki(){}
+    private Napakalaki(){    }
     
     private void initPlayers(ArrayList<String> names){
+        
+        for(int i=0; i<players.size();i++){
+            players.add(new Player (names.get(i)));
+            
+        }
         
     }
     
     private Player nextPlayer(){
-        return null;
+        
+        int turno,i=0;
+        
+        if(currentPlayer==null)
+               turno=0;
+        else
+            if(currentPlayer==players.get(players.size()-1))
+                turno=0;
+            else
+                    while(i<players.size()-1 && players.get(i)!=currentPlayer)
+                        i++;
+                    turno=i+1;
+        return players.get(turno);
     } 
     
-    private boolean nestTurnAllowed(){
-        return false;
+    private boolean nextTurnIsAllowed(){
+        return currentPlayer.validState();
     }
     
     private void setEnemies(){
+        int jug;
+        for(int i=0;i<players.size();i++){
+            jug= (int) (Math.random()* (players.size()-1));
+            if(jug==i)
+                i--;
+            else 
+                players.get(i).setEnemy(players.get(jug));
+        }
         
     }
     
@@ -43,40 +68,81 @@ public class Napakalaki {
     }
     
     public CombatResult developCombat(){
-        return null;
+       CombatResult cr=currentPlayer.combat(currentMonster);       
+       dealer.giveMonsterBack(currentMonster);
+        return cr;
     }
     
     public void discardVisibleTreasures(ArrayList<Treasure> treasures){
+        for(Treasure t: treasures){
+            currentPlayer.discardVisibleTreasure(t);
+            dealer.giveTreasureBack(t);
+            
+        }
         
     }
     
     public void discardHiddenTreasures(ArrayList<Treasure> treasures){
         
+            for(Treasure t: treasures){
+                currentPlayer.discardHiddenTreasure(t);
+                dealer.giveTreasureBack(t);
+            
+        }
+        
     }   
     
     public void makeTreasuresVisible(ArrayList<Treasure> treasures){
+            
+            Treasure t;
+            
+            for(int i=0;i<treasures.size();i++){
+                t=treasures.get(i+1);
+                currentPlayer.makeTreasureVisible(t);                     
+                
+            }
         
     }
     
     public void initGame(ArrayList<String> players){
+        initPlayers(players);
+        setEnemies();
+        dealer.initCards();    
+        nextTurn();
+        
         
     }
     
     public Player getCurrentPlayer(){
-        return null;
+        return currentPlayer;
     }
     
     public Monster getCurrentMonster(){
-        return null;
+        return currentMonster;
         
     }
     
     public boolean nextTurn(){
-        return false;
+        boolean stateOK=nextTurnIsAllowed();
+        boolean dead;
+        if(stateOK){
+            currentMonster=dealer.nextMonster();
+            currentPlayer=nextPlayer();
+            dead=currentPlayer.isDead();
+            if(dead)
+                currentPlayer.initTreasures();
+        }
+        
+        return stateOK;
     }
     
     public boolean endOfGame(CombatResult result){
-        return false;
+        
+        boolean end=false;
+        if(result != CombatResult.WINGAME)
+            end=true;
+        return end;
+                
     }
           
     
