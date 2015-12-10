@@ -52,9 +52,13 @@ public class Player {
     
     private void incrementLevels(int i){
         
+        level++;
+        
     }
     
     private void decrementLevels(int i){
+        
+        level--;
         
     }
     
@@ -167,6 +171,12 @@ public class Player {
     }
     
     public void discardHiddenTreasure(Treasure t){
+        
+        hiddenTreasures.remove(t);
+        if(pendingBadConsequence!=null && !pendingBadConsequence.isEmpty())
+            pendingBadConsequence.substractVisibleTreasure(t);
+        
+        dieIfNoTreasures();
         
     }
     
