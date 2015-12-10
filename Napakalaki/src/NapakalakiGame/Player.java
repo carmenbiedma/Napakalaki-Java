@@ -52,13 +52,13 @@ public class Player {
     
     private void incrementLevels(int i){
         
-        level++;
+        level=level+i;
         
     }
     
     private void decrementLevels(int i){
         
-        level--;
+        level=level-i;
         
     }
     
