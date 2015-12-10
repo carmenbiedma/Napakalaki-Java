@@ -218,6 +218,8 @@ public class CardDealer {
     public void initCards(){
         initTreasureCardDeck();
         initMonsterCardDeck();
+        shuffleTreasures();
+        shuffleMonsters();
         
     }
        
