@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package napakalaki;
+package NapakalakiGame;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class Player {
     private String name;
     private int level;
     private boolean dead;
-    private boolean canSteal;
+    private boolean canISteal;
     private  Player enemy;
     private ArrayList<Treasure> visibleTreasures= new ArrayList();
     private BadConsequence pendingBadConsequence;
@@ -27,7 +27,7 @@ public class Player {
     public Player(String nombre){
         name=nombre;
         dead=true; 
-        canSteal=true;
+        canISteal=true;
     }
     
     public String getName(){
@@ -173,7 +173,7 @@ public class Player {
     public boolean validState(){
         boolean state=false;
         
-        if(pendingBadConsequence.isEmpty() && hiddenTreasures.size()<=4 )
+        if(pendingBadConsequence==null || pendingBadConsequence.isEmpty() && hiddenTreasures.size()<=4 )
                state=true;
         
         return state;
@@ -209,7 +209,7 @@ public class Player {
     public Treasure stealTreasure(){
        Treasure treasure=null;   
        boolean canYou;
-       boolean canI=this.canSteal;
+       boolean canI=this.canISteal;
        
        if(canI){
            canYou=enemy.canYouGiveMeATreasure();
@@ -233,16 +233,22 @@ public class Player {
         return hiddenTreasures.get(i);
     }
     
-    public boolean canSteal(){
-        return false;
+    public boolean canISteal(){
+        if(this.canISteal==true){
+            return true;
+        }else
+            return false;
     }
     
     private boolean canYouGiveMeATreasure(){
-        return false;
+        if(this.visibleTreasures.size()>0){
+            return true;
+        } else 
+            return false;
     }
     
     private void haveStolen(){
-        
+        this.canISteal=false;
     }
     
     public void discardAllTreasures(){
@@ -259,5 +265,8 @@ public class Player {
         
     }
     
+     public String toString(){
+        return "Jugador = " + name;
+    }
         
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package napakalaki;
+package NapakalakiGame;
 
 import java.util.ArrayList;
 
@@ -112,10 +112,32 @@ public class BadConsequence {
         }
     }
     
-    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v,ArrayList<Treasure> h){
-        return null;
-    } 
-    
+    public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v, ArrayList<Treasure> h) {
+        
+        ArrayList<TreasureKind> tVisible = new ArrayList();
+        ArrayList<TreasureKind> tHidden = new ArrayList();
+        
+        //Recorremos los tesoros
+        for(Treasure t: v) {
+            //Si no contiene el TreasureKind lo agregamos
+            if (!tVisible.contains(t.getType())) {
+                tVisible.add(t.getType());
+            }
+        }
+        
+        //Recorremos los tesoros
+        for(Treasure t: h) {
+            //Si no contiene el TreasureKind lo agregamos
+            if (!tHidden.contains(t.getType())) {
+                tHidden.add(t.getType());
+            }
+        }
+
+        BadConsequence bs = new BadConsequence(this.text, 0, tVisible, tHidden);
+
+        return bs;
+
+    }
     public String toString(){
         return "Mal rollo: = " + text + " ,niveles que pierde = " + Integer.toString(levels) + " ,num tesoros visibles que pierdes: " +  Integer.toString(nVisibleTreasures) + " ,num tesoros escondidos que pierdes: " + Integer.toString(nHiddenTreasures);
     }

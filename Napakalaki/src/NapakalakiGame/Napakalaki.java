@@ -1,9 +1,9 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package napakalaki;
+package NapakalakiGame;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class Napakalaki {
     
     private static final Napakalaki instance=new Napakalaki();
     private Monster currentMonster;
-    private CardDealer dealer;
+    private CardDealer dealer= CardDealer.getInstance();
     private Player currentPlayer;
     private ArrayList<Player> players= new ArrayList();
     
@@ -24,7 +24,7 @@ public class Napakalaki {
     
     private void initPlayers(ArrayList<String> names){
         
-        for(int i=0; i<players.size();i++){
+        for(int i=0; i<names.size();i++){
             players.add(new Player (names.get(i)));
             
         }
@@ -33,32 +33,40 @@ public class Napakalaki {
     
     private Player nextPlayer(){
         
-        int turno,i=0;
+        int turno;
         
-        if(currentPlayer==null)
+        if(currentPlayer==null )
                turno=0;
-        else
-            if(currentPlayer==players.get(players.size()-1))
+        else{
+            if(players.indexOf(currentPlayer)== (players.size()-1))
                 turno=0;
-            else
-                    while(i<players.size()-1 && players.get(i)!=currentPlayer)
-                        i++;
-                    turno=i+1;
+            else{
+                    turno=players.indexOf(currentPlayer);
+                    turno++;
+            }
+        }
         return players.get(turno);
     } 
     
     private boolean nextTurnIsAllowed(){
-        return currentPlayer.validState();
+        if(currentPlayer==null)
+            return true;
+        else
+            return currentPlayer.validState();
     }
     
     private void setEnemies(){
         int jug;
+        
         for(int i=0;i<players.size();i++){
-            jug= (int) (Math.random()* (players.size()-1));
-            if(jug==i)
-                i--;
-            else 
-                players.get(i).setEnemy(players.get(jug));
+            
+            
+            do {
+                jug= (int) (Math.random()* (players.size()));
+            }
+            while(jug==i);
+       
+            players.get(i).setEnemy(players.get(jug));
         }
         
     }
@@ -123,7 +131,7 @@ public class Napakalaki {
     }
     
     public boolean nextTurn(){
-        boolean stateOK=nextTurnIsAllowed();
+        boolean stateOK=this.nextTurnIsAllowed();
         boolean dead;
         if(stateOK){
             currentMonster=dealer.nextMonster();
