@@ -28,6 +28,16 @@ public class Player {
         dead = true;
         canISteal = true;
     }
+    
+    public Player(Player p){
+        
+        if(this!=p){
+            this.name=p.name;
+            this.dead=p.dead;
+            this.canISteal=p.canISteal;
+        }
+        
+    }
 
     public String getName() {
         return name;
@@ -37,10 +47,12 @@ public class Player {
         dead = false;
     }
 
-    private int getCombatLevel() {
+    int getCombatLevel() {
         int v = 0, h = 0, nivel_total = 0;
         for (int i = 0; i < visibleTreasures.size(); i++) {
             v = v + visibleTreasures.get(i).getBonus();
+        }
+        for(int i=0;i<hiddenTreasures.size();i++){
             h = h + hiddenTreasures.get(i).getBonus();
         }
 
@@ -79,25 +91,40 @@ public class Player {
     }
 
     private void applyBadConsequence(Monster m) {
+        BadConsequence malrollo,pendingBad;
+        int nLevels;
+        
+        malrollo = m.getmalRollo();
+        nLevels = malrollo.getLevels();
+        decrementLevels(nLevels);
+        pendingBad = malrollo.adjustToFitTreasureLists(visibleTreasures,hiddenTreasures);
+        setPendingBadConsequence(pendingBad);  
+        
 
     }
 
     private boolean canMakeTreasureVisible(Treasure t) {
         boolean puede = true;
-        int j = 0;
+        int one = 0;
 
-        for (int i = 0; i < hiddenTreasures.size() && puede == true; i++) {
-            if (hiddenTreasures.get(i).getType() == t.getType()) {
+        for (int i = 0; i < visibleTreasures.size() && puede == true; i++) {
+            if (visibleTreasures.get(i).getType() == t.getType()) {
                 if (t.getType() == TreasureKind.onehand) {
-                    j++;
-                } else {
+                    one++;
+                } 
+                else {
                     puede = false;
                 }
             }
-            if (j == 2) {
+            if ((t.getType() == TreasureKind.bothhand && visibleTreasures.get(i).getType()== TreasureKind.onehand)
+                    || (t.getType() == TreasureKind.onehand && visibleTreasures.get(i).getType()== TreasureKind.bothhand)){
+                puede = false;
+            }
+            if (one == 2) {
                 puede = false;
             }
         }
+        
 
         return puede;
     }
@@ -138,7 +165,7 @@ public class Player {
     public CombatResult combat(Monster m) {
         CombatResult cr;
         int myLevel = getCombatLevel();
-        int monsterLevel = m.getCombatLevel();
+        int monsterLevel = this.getOponentLevel(m);
 
         if (myLevel > monsterLevel) {
             this.applyPrize(m);
@@ -151,6 +178,8 @@ public class Player {
         } else {
             this.applyBadConsequence(m);
             cr = CombatResult.LOSE;
+            if(this.shouldConvert()==true)
+                cr=CombatResult.LOSEANDCONVERT;
         }
         return cr;
     }
@@ -245,8 +274,8 @@ public class Player {
 
     }
 
-    private Treasure giveMeATreasure() {
-        int i = (int) (Math.random() * hiddenTreasures.size()) - 1;
+    public Treasure giveMeATreasure() {
+        int i = (int) (Math.random() * hiddenTreasures.size()-1);
         return hiddenTreasures.get(i);
     }
 
@@ -271,15 +300,18 @@ public class Player {
     }
 
     public void discardAllTreasures() {
-        Treasure treasure;
+        
+        Treasure t;
+        int i;
 
-        for (Treasure t : visibleTreasures) {
+        for (i=0;i<visibleTreasures.size();i++){
+            t=visibleTreasures.get(i);
             this.discardVisibleTreasure(t);
         }
 
-        for (Treasure t : hiddenTreasures) {
+        for (i=0;i<hiddenTreasures.size();i++){
+            t=hiddenTreasures.get(i);
             this.discardHiddenTreasure(t);
-
         }
 
     }
@@ -287,5 +319,22 @@ public class Player {
     public String toString() {
         return "Jugador = " + name;
     }
+    
+    //PRACTICA 4
+    
+    int getOponentLevel(Monster m){
+        return m.getCombatLevel();
+    }
+    
+    boolean shouldConvert(){
+        Dice dice= Dice.getInstance();
+        int n=dice.nextNumber();
+        
+        if(n==1)
+            return true;
+        else
+            return false;
+    }
+    
 
 }

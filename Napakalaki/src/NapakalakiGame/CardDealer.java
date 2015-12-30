@@ -20,6 +20,7 @@ public class CardDealer {
     private ArrayList<Treasure> unusedTreasures = new ArrayList();
     private ArrayList<Monster> usedMonsters = new ArrayList();
     private ArrayList<Monster> unusedMonsters = new ArrayList();
+    private ArrayList<Cultist> unusedCultists = new ArrayList();
     
     
     private CardDealer(){}
@@ -161,7 +162,52 @@ public class CardDealer {
         badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos.",3,new ArrayList(Arrays.asList(TreasureKind.onehand,TreasureKind.onehand,TreasureKind.bothhand)),new ArrayList());
         prize = new Prize(1,1);
         unusedMonsters.add(new Monster("Bicéfalo", 20, badConsequence, prize));
-    
+        
+        //MONSTRUOS CON SECTARIOS
+        
+        //El mal indecible impronunciable
+        
+        badConsequence = new BadConsequence("Pierdes 1 mano visibe",0,new ArrayList(Arrays.asList(TreasureKind.onehand)),new ArrayList());
+        prize = new Prize(3,1);
+        unusedMonsters.add(new Monster("El mal indecible impronunciable", 10, badConsequence, prize,-2));
+        
+        //Testigos oculares
+        
+        badConsequence = new BadConsequence("Pierdes tus tesoros visibles. Jajaja",0,new ArrayList(Arrays.asList(TreasureKind.onehand,TreasureKind.onehand,TreasureKind.bothhand,TreasureKind.helmet,TreasureKind.armor,TreasureKind.shoes)),new ArrayList());
+        prize = new Prize(2,1);
+        unusedMonsters.add(new Monster("Testigos oculares", 6, badConsequence, prize,2));
+        
+        //El gran cthulhu
+        
+        badConsequence = new BadConsequence("Hoy no es tu dia de suerte. Mueres",true);
+        prize = new Prize(2,5);
+        unusedMonsters.add(new Monster("El gran cthulhu",20, badConsequence, prize,4));
+        
+        //Serpiente politico
+        
+        badConsequence = new BadConsequence("Tu gobierno te recorta 2 niveles.",2,0,0);
+        prize = new Prize(2,1);
+        unusedMonsters.add(new Monster("Serpiente politico",8, badConsequence, prize,-2));
+        
+        //Felpuggoth
+        
+        badConsequence = new BadConsequence("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas",0,new ArrayList(Arrays.asList(TreasureKind.helmet,TreasureKind.armor)),new ArrayList(Arrays.asList(TreasureKind.onehand,TreasureKind.onehand,TreasureKind.bothhand)));
+        prize = new Prize(1,1);
+        unusedMonsters.add(new Monster("Felpuggoth",2, badConsequence, prize,5));
+        
+        //Shoggoth
+        
+        badConsequence = new BadConsequence("Pierdes 2 niveles.",2,0,0);
+        prize = new Prize(4,2);
+        unusedMonsters.add(new Monster("Shoggoth",16, badConsequence, prize,-4));
+        
+        //Lolitaggoth
+        
+        badConsequence = new BadConsequence("Pintalabios negro. Pierdes 2 niveles.",2,0,0);
+        prize = new Prize(2,1);
+        unusedMonsters.add(new Monster("Serpiente politico",2, badConsequence, prize,3));
+                    
+            
     }
     
     private void shuffleTreasures(){
@@ -218,9 +264,44 @@ public class CardDealer {
     public void initCards(){
         initTreasureCardDeck();
         initMonsterCardDeck();
+        initCultistCardDeck();
         shuffleTreasures();
         shuffleMonsters();
+        shuffleCultists();
         
+    }
+    
+    //PRACTICA 4
+    
+    private void shuffleCultists(){
+        Collections.shuffle(unusedCultists);
+    }
+    
+    private void initCultistCardDeck(){
+        
+        Cultist c= new Cultist("Sectario",1);
+        unusedCultists.add(c);
+        
+        c= new Cultist("Sectario",2);
+        unusedCultists.add(c);
+        
+        c=new Cultist("Sectario",1);
+        unusedCultists.add(c);
+        
+        c=new Cultist("Sectario",2);
+        unusedCultists.add(c);
+        
+        c=new Cultist("Sectario",1);
+        unusedCultists.add(c);
+        
+        c=new Cultist("Sectario",1);
+        unusedCultists.add(c);
+        
+        
+    }   
+    
+    public Cultist nextCultist(){
+        return null;
     }
        
         

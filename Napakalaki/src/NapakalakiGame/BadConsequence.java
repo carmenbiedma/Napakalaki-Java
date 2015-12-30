@@ -114,30 +114,41 @@ public class BadConsequence {
     
     public BadConsequence adjustToFitTreasureLists(ArrayList<Treasure> v, ArrayList<Treasure> h) {
         
-        ArrayList<TreasureKind> tVisible = new ArrayList();
-        ArrayList<TreasureKind> tHidden = new ArrayList();
+      BadConsequence bc;
         
-        //Recorremos los tesoros
-        for(Treasure t: v) {
-            //Si no contiene el TreasureKind lo agregamos
-            if (!tVisible.contains(t.getType())) {
-                tVisible.add(t.getType());
+        ArrayList<TreasureKind> visible = new ArrayList();
+        ArrayList<TreasureKind> oculto = new ArrayList();        
+        
+        if(specificHiddenTreasures.size()>0){
+            for(int i=0; i<specificHiddenTreasures.size(); i++){
+                for(int j=0; j<h.size(); j++){
+                    if(specificHiddenTreasures.get(i) == h.get(j).getType())
+                        oculto.add(specificHiddenTreasures.get(i));
+                }          
+            }        
+        }
+        
+        if (specificVisibleTreasures.size()>0){       
+            for(int i=0; i<specificVisibleTreasures.size(); i++){
+                for(int j=0; j<v.size(); j++){
+                    if(specificVisibleTreasures.get(i)==v.get(j).getType())
+                        visible.add(specificVisibleTreasures.get(i));
+                }          
             }
         }
         
-        //Recorremos los tesoros
-        for(Treasure t: h) {
-            //Si no contiene el TreasureKind lo agregamos
-            if (!tHidden.contains(t.getType())) {
-                tHidden.add(t.getType());
-            }
+        if(specificVisibleTreasures.size()==0 && specificHiddenTreasures.size()==0){     
+            for(int i=0; i<specificHiddenTreasures.size() && i<nVisibleTreasures;i++)
+                oculto.add(v.get(i).getType());
+            for(int i=0; i<specificVisibleTreasures.size() && i<nHiddenTreasures; i++)
+                visible.add(h.get(i).getType());
         }
-
-        BadConsequence bs = new BadConsequence(this.text, 0, tVisible, tHidden);
-
-        return bs;
-
+        
+        bc = new BadConsequence("",0,visible,oculto);
+        
+        return bc;
     }
+    
     public String toString(){
         return "Mal rollo: = " + text + " ,niveles que pierde = " + Integer.toString(levels) + " ,num tesoros visibles que pierdes: " +  Integer.toString(nVisibleTreasures) + " ,num tesoros escondidos que pierdes: " + Integer.toString(nHiddenTreasures);
     }
