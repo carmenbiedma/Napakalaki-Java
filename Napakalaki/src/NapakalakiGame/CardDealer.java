@@ -27,7 +27,7 @@ public class CardDealer {
     
     private void initTreasureCardDeck(){
 
-        unusedTreasures.add(new Treasure("¡Śı mi amo!", 4, TreasureKind.helmet));
+        unusedTreasures.add(new Treasure("¡Sí mi amo!", 4, TreasureKind.helmet));
         unusedTreasures.add(new Treasure("Botas de investigación", 3,TreasureKind.shoes));
         unusedTreasures.add(new Treasure("Capucha de Cthulhu", 3,TreasureKind.helmet));
         unusedTreasures.add(new Treasure("A prueba de babas",2,TreasureKind.armor));
@@ -301,7 +301,13 @@ public class CardDealer {
     }   
     
     public Cultist nextCultist(){
-        return null;
+        if(unusedCultists.isEmpty()){
+                this.initCultistCardDeck();
+                this.shuffleCultists();
+        }
+        Cultist m = this.unusedCultists.get(0);
+        this.unusedCultists.remove(m); 
+        return m;
     }
        
         

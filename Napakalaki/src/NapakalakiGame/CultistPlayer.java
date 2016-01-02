@@ -5,6 +5,9 @@
  */
 package NapakalakiGame;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author Carmen Biedma
@@ -23,32 +26,37 @@ public class CultistPlayer extends Player {
     
     @Override
             
-    int getCombatLevel(){
+    protected int getCombatLevel(){
         
         int l;
-        l=getCombatLevel()+ (getCombatLevel()*20)/100 + myCultistCard.getGainedLevels()*totalCultistPlayers;       
+        l=super.getCombatLevel()+ (super.getCombatLevel()*20)/100 + myCultistCard.getGainedLevels()*totalCultistPlayers;       
                 
         return l;
     }   
     
     @Override
             
-    int getOponentLevel(Monster m){
+    protected int getOponentLevel(Monster m){
         return m.getcombatLevelAgainstCultistPlayer();
     }
+    
     @Override
-    boolean shouldConvert(){
+    protected boolean shouldConvert(){
         return false;
     }
     
     @Override
     
-    public Treasure giveMeATreasure(){
-        return null;
+    protected Treasure giveMeATreasure(){
+        Random r = new Random();
+        ArrayList<Treasure> vt = super.getVisibleTreasures();
+        int index = r.nextInt()*vt.size();
+        return vt.get(index);
     }
     
-    private boolean canYouGiveMeATreasure(){
-        return true;
+    @Override
+    protected boolean canYouGiveMeATreasure(){
+        return !super.getEnemy().getVisibleTreasures().isEmpty();
     
     }
     

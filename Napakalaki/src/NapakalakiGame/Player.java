@@ -47,7 +47,7 @@ public class Player {
         dead = false;
     }
 
-    int getCombatLevel() {
+    protected int getCombatLevel() {
         int v = 0, h = 0, nivel_total = 0;
         for (int i = 0; i < visibleTreasures.size(); i++) {
             v = v + visibleTreasures.get(i).getBonus();
@@ -274,7 +274,7 @@ public class Player {
 
     }
 
-    public Treasure giveMeATreasure() {
+    protected Treasure giveMeATreasure() {
         int i = (int) (Math.random() * hiddenTreasures.size()-1);
         return hiddenTreasures.get(i);
     }
@@ -287,7 +287,7 @@ public class Player {
         }
     }
 
-    private boolean canYouGiveMeATreasure() {
+    protected boolean canYouGiveMeATreasure() {
         if (this.visibleTreasures.size() > 0) {
             return true;
         } else {
@@ -322,11 +322,11 @@ public class Player {
     
     //PRACTICA 4
     
-    int getOponentLevel(Monster m){
+    protected int getOponentLevel(Monster m){
         return m.getCombatLevel();
     }
     
-    boolean shouldConvert(){
+    protected boolean shouldConvert(){
         Dice dice= Dice.getInstance();
         int n=dice.nextNumber();
         
@@ -336,5 +336,8 @@ public class Player {
             return false;
     }
     
+    protected Player getEnemy(){
+        return enemy;
+    }
 
 }

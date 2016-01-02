@@ -20,7 +20,7 @@ public class Cultist {
     }
     
     public int getGainedLevels(){
-        return 0;
+        return gainedLevels;
     }
             
     
