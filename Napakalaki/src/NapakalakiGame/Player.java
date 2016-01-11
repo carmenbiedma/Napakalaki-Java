@@ -329,11 +329,12 @@ public class Player {
     protected boolean shouldConvert(){
         Dice dice= Dice.getInstance();
         int n=dice.nextNumber();
+        boolean should=false;
         
         if(n==1)
-            return true;
-        else
-            return false;
+            should=true;
+       return should;
+        
     }
     
     protected Player getEnemy(){

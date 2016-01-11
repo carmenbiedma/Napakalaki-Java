@@ -57,7 +57,7 @@ public class Monster {
         return buenRollo.getLevel();
     }
     
-    public int getcombatLevelAgainstCultistPlayer(){
+    public int getCombatLevelAgainstCultistPlayer(){
         return getCombatLevel()+levelChangeAgainstCultistplayer;
     }
      public String toString(){
