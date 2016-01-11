@@ -275,7 +275,7 @@ public class Player {
     }
 
     protected Treasure giveMeATreasure() {
-        int i = (int) (Math.random() * hiddenTreasures.size()-1);
+        int i = (int) (Math.random() * hiddenTreasures.size())-1;
         return hiddenTreasures.get(i);
     }
 

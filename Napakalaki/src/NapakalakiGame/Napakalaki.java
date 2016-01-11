@@ -20,7 +20,7 @@ public class Napakalaki {
     private ArrayList<Player> players= new ArrayList();
     
     
-    private Napakalaki(){    }
+    public Napakalaki(){    }
     
     private void initPlayers(ArrayList<String> names){
         

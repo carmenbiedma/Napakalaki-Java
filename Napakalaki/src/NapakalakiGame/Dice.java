@@ -5,13 +5,15 @@
  */
 package NapakalakiGame;
 
-import java.util.Random;
 
+
+import java.util.Random;
 /**
  *
  * @author Carmen Biedma
  */
 public class Dice {
+    
     
     private static final Dice instance=new Dice();
     
@@ -26,6 +28,5 @@ public class Dice {
         int n = r.nextInt(6)+1;
         return n;
     }
-    
     
 }
