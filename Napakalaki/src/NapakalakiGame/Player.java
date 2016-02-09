@@ -47,8 +47,10 @@ public class Player {
     private void bringToLife() {
         dead = false;
     }
-
-    protected int getCombatLevel() {
+    public BadConsequence getBadConsequence(){
+        return pendingBadConsequence;
+    }
+   public int getCombatLevel() {
         int v = 0, h = 0, nivel_total = 0;
         for (int i = 0; i < visibleTreasures.size(); i++) {
             v = v + visibleTreasures.get(i).getBonus();
@@ -338,7 +340,7 @@ public class Player {
         
     }
     
-    protected Player getEnemy(){
+    public Player getEnemy(){
         return enemy;
     }
 

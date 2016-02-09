@@ -4,28 +4,31 @@
  * and open the template in the editor.
  */
 package GUI;
+
 import NapakalakiGame.BadConsequence;
+
 /**
  *
- * @author Evelyn
+ * @author Carmen Biedma
  */
-public class BadConsequenceView extends javax.swing.JPanel {
-    
-    private BadConsequence badConsequenceModel;
+public class PendingBadConsequenceView extends javax.swing.JPanel {
 
+    private static BadConsequence pendingBadConsequenceModel;
     /**
-     * Creates new form BadConsequenceView
+     * Creates new form PendingBadConsequenceView
      */
-    public BadConsequenceView() {
+    public PendingBadConsequenceView() {
         initComponents();
     }
-public void setBadConsequence (BadConsequence bc) {
-            badConsequenceModel = bc;
-            this.txt.setText (badConsequenceModel.getText());
+    
+    public void setPendingBadConsequence (BadConsequence bc) {
+            pendingBadConsequenceModel = bc;
+            this.pbc.setText (pendingBadConsequenceModel.getText());
                        
             repaint();
             revalidate();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,33 +39,33 @@ public void setBadConsequence (BadConsequence bc) {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        txt = new javax.swing.JTextArea();
+        pbc = new javax.swing.JTextArea();
 
-        txt.setColumns(20);
-        txt.setRows(5);
-        jScrollPane1.setViewportView(txt);
+        pbc.setColumns(20);
+        pbc.setRows(5);
+        jScrollPane1.setViewportView(pbc);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(109, 109, 109)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txt;
+    private javax.swing.JTextArea pbc;
     // End of variables declaration//GEN-END:variables
 }

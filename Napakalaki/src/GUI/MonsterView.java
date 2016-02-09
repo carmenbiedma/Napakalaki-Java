@@ -5,17 +5,33 @@
  */
 package GUI;
 
+import NapakalakiGame.BadConsequence;
+import NapakalakiGame.Prize;
+import NapakalakiGame.Monster;
+
 /**
  *
  * @author Evelyn
  */
 public class MonsterView extends javax.swing.JPanel {
+    
+    private Monster monsterModel;
 
     /**
      * Creates new form MonsterView
      */
     public MonsterView() {
         initComponents();
+    }
+    
+    public void setMonster (Monster m) {
+            monsterModel = m;
+            this.name.setText (monsterModel.getName());
+            this.combatLevel.setText (Integer.toString(monsterModel.getCombatLevel()));   
+            this.badConsequenceView1.setBadConsequence(m.getmalRollo());
+             this.prizeView1.setPrize(m.getbuenRollo());
+            repaint();
+            revalidate();
     }
 
     /**
@@ -27,19 +43,75 @@ public class MonsterView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        prizeView1 = new GUI.PrizeView();
+        badConsequenceView1 = new GUI.BadConsequenceView();
+        name = new javax.swing.JLabel();
+        combatLevel = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout prizeView1Layout = new javax.swing.GroupLayout(prizeView1);
+        prizeView1.setLayout(prizeView1Layout);
+        prizeView1Layout.setHorizontalGroup(
+            prizeView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        prizeView1Layout.setVerticalGroup(
+            prizeView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout badConsequenceView1Layout = new javax.swing.GroupLayout(badConsequenceView1);
+        badConsequenceView1.setLayout(badConsequenceView1Layout);
+        badConsequenceView1Layout.setHorizontalGroup(
+            badConsequenceView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        badConsequenceView1Layout.setVerticalGroup(
+            badConsequenceView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        name.setText("jLabel1");
+
+        combatLevel.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(name)
+                    .addComponent(combatLevel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(badConsequenceView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(prizeView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(prizeView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(name)
+                        .addGap(37, 37, 37)
+                        .addComponent(combatLevel)))
+                .addGap(67, 67, 67)
+                .addComponent(badConsequenceView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private GUI.BadConsequenceView badConsequenceView1;
+    private javax.swing.JLabel combatLevel;
+    private javax.swing.JLabel name;
+    private GUI.PrizeView prizeView1;
     // End of variables declaration//GEN-END:variables
 }

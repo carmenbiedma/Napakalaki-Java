@@ -4,18 +4,29 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import NapakalakiGame.Prize;
 /**
  *
  * @author Evelyn
  */
 public class PrizeView extends javax.swing.JPanel {
+    
+    private Prize prizeModel;
 
     /**
      * Creates new form PrizeView
      */
     public PrizeView() {
         initComponents();
+    }
+    
+    public void setPrize (Prize p) {
+            prizeModel = p;
+            this.level.setText (Integer.toString(prizeModel.getLevel()));
+            this.treasures.setText (Integer.toString(prizeModel.getTreasures()));
+            
+            repaint();
+            revalidate();
     }
 
     /**
@@ -27,19 +38,38 @@ public class PrizeView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        level = new javax.swing.JLabel();
+        treasures = new javax.swing.JLabel();
+
+        level.setText("jLabel1");
+
+        treasures.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(treasures, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(treasures, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel level;
+    private javax.swing.JLabel treasures;
     // End of variables declaration//GEN-END:variables
 }

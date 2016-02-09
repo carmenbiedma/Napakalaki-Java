@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import NapakalakiGame.Treasure;
 
 /**
  *
@@ -11,12 +12,31 @@ package GUI;
  */
 public class TreasureView extends javax.swing.JPanel {
 
+     private Treasure treasureModel;
+     private boolean seleccionado=false;
     /**
      * Creates new form TreasureView
      */
     public TreasureView() {
         initComponents();
     }
+    
+    public boolean isSelected(){
+        return seleccionado;
+    }
+    
+    public Treasure getTreasure(){
+        return treasureModel;
+    }
+    
+public void setTreasure (Treasure aTreasure) {
+  
+    treasureModel = aTreasure;
+    this.name.setText (treasureModel.getName());
+    this.bonus.setText (Integer.toString(treasureModel.getBonus()));
+    this.tipo.setText (treasureModel.getType().toString());
+    repaint();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,19 +47,62 @@ public class TreasureView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        name = new javax.swing.JLabel();
+        bonus = new javax.swing.JLabel();
+        tipo = new javax.swing.JLabel();
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
+        name.setText("jLabel1");
+
+        bonus.setText("jLabel1");
+
+        tipo.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(bonus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addComponent(tipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bonus, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+       seleccionado=!seleccionado;
+       setOpaque(this.seleccionado);
+       
+        repaint();        
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bonus;
+    private javax.swing.JLabel name;
+    private javax.swing.JLabel tipo;
     // End of variables declaration//GEN-END:variables
 }
