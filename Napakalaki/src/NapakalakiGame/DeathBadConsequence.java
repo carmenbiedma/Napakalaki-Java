@@ -16,6 +16,7 @@ public class DeathBadConsequence extends NumericBadConsequence{
         super(txt, Player.MAXLEVEL, MAXTREASURES, MAXTREASURES);
         death=dth;
     }
+    
     @Override
     public boolean isEmpty ()
     {
