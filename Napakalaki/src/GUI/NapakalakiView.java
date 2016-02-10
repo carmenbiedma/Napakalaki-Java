@@ -61,7 +61,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         botonMeetTheMonster = new javax.swing.JButton();
         botonCombat = new javax.swing.JButton();
         botonNextTurn = new javax.swing.JButton();
-        CombatResult = new javax.swing.JLabel();
+        combatResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,7 +97,7 @@ public class NapakalakiView extends javax.swing.JFrame {
             }
         });
 
-        CombatResult.setText("jLabel1");
+        combatResult.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,7 +119,7 @@ public class NapakalakiView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(CombatResult)
+                        .addComponent(combatResult)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -128,7 +128,7 @@ public class NapakalakiView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(CombatResult)
+                .addComponent(combatResult)
                 .addGap(77, 77, 77)
                 .addComponent(playerView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -153,7 +153,7 @@ public class NapakalakiView extends javax.swing.JFrame {
 
     private void botonCombatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCombatActionPerformed
          CombatResult cr = napakalakiModel.developCombat();
-        labelCombatResult.setText(cr.toString());
+        combatResult.setText(cr.toString());
         setNapakalaki(napakalakiModel);
     }//GEN-LAST:event_botonCombatActionPerformed
 
@@ -165,10 +165,10 @@ public class NapakalakiView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CombatResult;
     private javax.swing.JButton botonCombat;
     private javax.swing.JButton botonMeetTheMonster;
     private javax.swing.JButton botonNextTurn;
+    private javax.swing.JLabel combatResult;
     private GUI.MonsterView monsterView1;
     private GUI.PlayerView playerView1;
     // End of variables declaration//GEN-END:variables
