@@ -6,11 +6,11 @@
 package GUI;
 import NapakalakiGame.Player;
 import NapakalakiGame.Treasure;
-import NapakalakiGame.BadConsequence;
 import NapakalakiGame.CultistPlayer;
 import NapakalakiGame.Napakalaki;
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /**
  *
@@ -171,28 +171,6 @@ public class PlayerView extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout visibleTreasuresLayout = new javax.swing.GroupLayout(visibleTreasures);
-        visibleTreasures.setLayout(visibleTreasuresLayout);
-        visibleTreasuresLayout.setHorizontalGroup(
-            visibleTreasuresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        visibleTreasuresLayout.setVerticalGroup(
-            visibleTreasuresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout hiddenTreasuresLayout = new javax.swing.GroupLayout(hiddenTreasures);
-        hiddenTreasures.setLayout(hiddenTreasuresLayout);
-        hiddenTreasuresLayout.setHorizontalGroup(
-            hiddenTreasuresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        hiddenTreasuresLayout.setVerticalGroup(
-            hiddenTreasuresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 233, Short.MAX_VALUE)
-        );
-
         name.setText("jLabel1");
 
         level.setText("jLabel2");
@@ -204,6 +182,11 @@ public class PlayerView extends javax.swing.JPanel {
         enemy.setText("jLabel5");
 
         stealTreasure.setText("Steal Treasure");
+        stealTreasure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stealTreasureActionPerformed(evt);
+            }
+        });
 
         makeVisible.setText("Make Visible");
         makeVisible.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +203,11 @@ public class PlayerView extends javax.swing.JPanel {
         });
 
         discardAllTreasure.setText("Discard all treasures");
+        discardAllTreasure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discardAllTreasureActionPerformed(evt);
+            }
+        });
 
         sectario.setText("jLabel1");
 
@@ -316,6 +304,25 @@ public class PlayerView extends javax.swing.JPanel {
         
         this.setPlayer(this.playerModel,napakalakiView);
     }//GEN-LAST:event_discardTreasuresActionPerformed
+
+    private void stealTreasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stealTreasureActionPerformed
+        Treasure aTreasure = napakalakiModel.getCurrentPlayer().stealTreasure();
+        if(aTreasure == null){
+            JOptionPane.showMessageDialog(null, "No has podido robar nada!");
+        } else{
+            JOptionPane.showMessageDialog(null, "Has robado un tesoro!");
+        }
+        setPlayer(napakalakiModel.getCurrentPlayer(), napakalakiView);
+    }//GEN-LAST:event_stealTreasureActionPerformed
+
+    private void discardAllTreasureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardAllTreasureActionPerformed
+         ArrayList<Treasure> selHidden = getAllTreasures(hiddenTreasures);
+         ArrayList<Treasure> selVisible = getAllTreasures(visibleTreasures);
+        napakalakiModel.discardHiddenTreasures(selHidden);
+        napakalakiModel.discardVisibleTreasures(selVisible);
+        setPlayer(napakalakiModel.getCurrentPlayer(),napakalakiView);
+        pendingBadConsequenceView1.setPendingBadConsequence(playerModel.getBadConsequence());
+    }//GEN-LAST:event_discardAllTreasureActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
