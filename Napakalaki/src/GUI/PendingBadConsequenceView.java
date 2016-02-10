@@ -28,6 +28,11 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
             repaint();
             revalidate();
     }
+    
+    public BadConsequence getPendingBadConsequence(){
+        return pendingBadConsequenceModel;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

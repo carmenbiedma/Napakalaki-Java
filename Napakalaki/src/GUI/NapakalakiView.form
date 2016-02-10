@@ -27,11 +27,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonMeetTheMonster" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonCombat" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonNextTurn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" pref="419" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -51,9 +51,9 @@
               <Component id="playerView1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonNextTurn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonMeetTheMonster" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonCombat" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
@@ -79,17 +79,17 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="botonMeetTheMonster">
       <Properties>
         <Property name="text" type="java.lang.String" value="Meet the Monster"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="botonCombat">
       <Properties>
         <Property name="text" type="java.lang.String" value="Combat"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="botonNextTurn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Next Turn"/>
       </Properties>

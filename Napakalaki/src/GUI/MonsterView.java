@@ -15,7 +15,7 @@ import NapakalakiGame.Monster;
  */
 public class MonsterView extends javax.swing.JPanel {
     
-    private Monster monsterModel;
+    Monster monsterModel;
 
     /**
      * Creates new form MonsterView
@@ -26,12 +26,11 @@ public class MonsterView extends javax.swing.JPanel {
     
     public void setMonster (Monster m) {
             monsterModel = m;
-            this.name.setText (monsterModel.getName());
-            this.combatLevel.setText (Integer.toString(monsterModel.getCombatLevel()));   
+            this.name.setText ("Nombre: " + m.getName());
+            this.combatLevel.setText ("Nivel de combate: " + Integer.toString(m.getCombatLevel()));   
             this.badConsequenceView1.setBadConsequence(m.getmalRollo());
-             this.prizeView1.setPrize(m.getbuenRollo());
+            this.prizeView1.setPrize(m.getbuenRollo());
             repaint();
-            revalidate();
     }
 
     /**

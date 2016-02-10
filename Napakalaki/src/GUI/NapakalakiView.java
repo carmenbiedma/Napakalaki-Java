@@ -24,11 +24,28 @@ public class NapakalakiView extends javax.swing.JFrame {
     
     public void setNapakalaki(Napakalaki np ){
         napakalakiModel=np;
-        monsterView1.setMonster(np.getCurrentMonster());
-        playerView1.setPlayer(np.getCurrentPlayer());
+        
+        if(napakalakiModel.getCurrentMonster()!=null) 
+            monsterView1.setMonster(np.getCurrentMonster());
+        
+        playerView1.setPlayer(np.getCurrentPlayer(),this);
+        playerView1.setNapakalakiModel(np);
+        
+        botonMeetTheMonster.setEnabled(true);
+        
+        update();
+        
         repaint();
     }
 
+    public void update(){
+        if(playerView1.getPBadConsequenceView().getPendingBadConsequence() != null && playerView1.getPBadConsequenceView().getPendingBadConsequence().isEmpty()){
+            botonNextTurn.setEnabled(true);
+        }
+        playerView1.update();
+        repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,9 +57,9 @@ public class NapakalakiView extends javax.swing.JFrame {
 
         monsterView1 = new GUI.MonsterView();
         playerView1 = new GUI.PlayerView();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonMeetTheMonster = new javax.swing.JButton();
+        botonCombat = new javax.swing.JButton();
+        botonNextTurn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,11 +74,11 @@ public class NapakalakiView extends javax.swing.JFrame {
             .addGap(0, 675, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Meet the Monster");
+        botonMeetTheMonster.setText("Meet the Monster");
 
-        jButton2.setText("Combat");
+        botonCombat.setText("Combat");
 
-        jButton3.setText("Next Turn");
+        botonNextTurn.setText("Next Turn");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,11 +88,11 @@ public class NapakalakiView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jButton1)
+                        .addComponent(botonMeetTheMonster)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton2)
+                        .addComponent(botonCombat)
                         .addGap(41, 41, 41)
-                        .addComponent(jButton3)
+                        .addComponent(botonNextTurn)
                         .addGap(18, 419, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(playerView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -90,9 +107,9 @@ public class NapakalakiView extends javax.swing.JFrame {
                 .addComponent(playerView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botonNextTurn)
+                    .addComponent(botonMeetTheMonster)
+                    .addComponent(botonCombat))
                 .addGap(27, 27, 27))
             .addComponent(monsterView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -102,9 +119,9 @@ public class NapakalakiView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botonCombat;
+    private javax.swing.JButton botonMeetTheMonster;
+    private javax.swing.JButton botonNextTurn;
     private GUI.MonsterView monsterView1;
     private GUI.PlayerView playerView1;
     // End of variables declaration//GEN-END:variables
