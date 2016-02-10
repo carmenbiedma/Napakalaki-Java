@@ -60,6 +60,7 @@ public class Monster {
     public int getCombatLevelAgainstCultistPlayer(){
         return getCombatLevel()+levelChangeAgainstCultistplayer;
     }
+
      public String toString(){
         return "Nombre = " + name + " ,nivel de combate = " + Integer.toString(combatLevel) + " , buen rollo: " + buenRollo + " , mal rollo: " + malRollo;
     }
