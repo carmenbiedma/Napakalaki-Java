@@ -17,12 +17,13 @@ public class main {
     
     public static void main (String[] args){
         
-        Napakalaki game= new Napakalaki();
+        Napakalaki game= Napakalaki.getInstance();
         NapakalakiView napakalakiView= new NapakalakiView();
+        Dice.createInstance (napakalakiView);
         ArrayList<String> names = new ArrayList();
         PlayerNamesCapture namesCapture = new PlayerNamesCapture(napakalakiView,true);
         
-        Dice.createInstance (napakalakiView);
+        
         napakalakiView.setNapakalaki(game);
          
         names = namesCapture.getNames();
