@@ -22,7 +22,7 @@ public class PrizeView extends javax.swing.JPanel {
     
     public void setPrize (Prize p) {
             prizeModel = p;
-            this.level.setText (Integer.toString(prizeModel.getLevel()));
+            this.level.setText ( Integer.toString(prizeModel.getLevel()));
             this.treasures.setText (Integer.toString(prizeModel.getTreasures()));
             
             repaint();

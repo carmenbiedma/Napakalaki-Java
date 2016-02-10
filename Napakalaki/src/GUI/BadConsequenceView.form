@@ -35,9 +35,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="txt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
