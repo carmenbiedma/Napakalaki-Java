@@ -6,6 +6,8 @@
 package GUI;
 import NapakalakiGame.CombatResult;
 import NapakalakiGame.Napakalaki;
+import static java.lang.System.exit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,13 +34,20 @@ public class NapakalakiView extends javax.swing.JFrame {
         playerView1.setPlayer(np.getCurrentPlayer(),this);
         playerView1.setNapakalakiModel(np);
        
-        
+        playerView1.getPBadConsequenceView().setVisible(false);
+        playerView1.setBotonRobar(false);
         botonMeetTheMonster.setEnabled(true);
         
         update();
         
         repaint();
     }
+    
+    public void finDelJuego(){
+        JOptionPane.showMessageDialog(null, "¡FIN DEL JUEGO! \n Ha ganado "+playerView1.playerModel.getName()+"!");
+        exit(0);
+    }
+    
 
     public void update(){
         if(playerView1.getPBadConsequenceView().getPendingBadConsequence() != null && playerView1.getPBadConsequenceView().getPendingBadConsequence().isEmpty()){
@@ -90,8 +99,10 @@ public class NapakalakiView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Combat Result");
+        combatResult.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("COMBAT RESULT");
 
         playerView1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,8 +114,8 @@ public class NapakalakiView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
                         .addComponent(combatResult, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -152,12 +163,26 @@ public class NapakalakiView extends javax.swing.JFrame {
         monsterView1.setVisible(true);
         botonCombat.setEnabled(true);
         botonMeetTheMonster.setEnabled(false);
+        playerView1.setBotonesDescartar(false);
+        playerView1.setBotonMakeVisible(false);
+        repaint();
     }//GEN-LAST:event_botonMeetTheMonsterActionPerformed
 
     private void botonCombatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCombatActionPerformed
-         CombatResult cr = napakalakiModel.developCombat();
-        combatResult.setText(cr.toString());
+        CombatResult cr = napakalakiModel.developCombat();
         setNapakalaki(napakalakiModel);
+        if(cr == CombatResult.WINGAME)
+            finDelJuego();
+        
+        combatResult.setText(cr.toString());
+        playerView1.update();
+        playerView1.setBotonMakeVisible(true);
+        playerView1.setBotonesDescartar(true);
+        playerView1.setBotonRobar(true);
+        botonCombat.setEnabled(false);
+        update();
+        repaint();
+    
     }//GEN-LAST:event_botonCombatActionPerformed
 
     private void botonNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNextTurnActionPerformed

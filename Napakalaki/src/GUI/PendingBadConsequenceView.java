@@ -24,11 +24,12 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
     }
     
     public void setPendingBadConsequence (BadConsequence bc) {
+            if( pbc != null){
             pendingBadConsequenceModel = bc;
             this.pbc.setText (pendingBadConsequenceModel.getText());
-                       
-            repaint();
-            revalidate();
+            }
+            
+        repaint();
     }
     
     public BadConsequence getPendingBadConsequence(){
