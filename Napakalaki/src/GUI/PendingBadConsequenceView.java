@@ -19,6 +19,8 @@ public class PendingBadConsequenceView extends javax.swing.JPanel {
      */
     public PendingBadConsequenceView() {
         initComponents();
+        
+        
     }
     
     public void setPendingBadConsequence (BadConsequence bc) {
