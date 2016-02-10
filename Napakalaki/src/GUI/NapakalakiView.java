@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import NapakalakiGame.CombatResult;
 import NapakalakiGame.Napakalaki;
 
 /**
@@ -60,6 +61,7 @@ public class NapakalakiView extends javax.swing.JFrame {
         botonMeetTheMonster = new javax.swing.JButton();
         botonCombat = new javax.swing.JButton();
         botonNextTurn = new javax.swing.JButton();
+        CombatResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,14 +73,31 @@ public class NapakalakiView extends javax.swing.JFrame {
         );
         playerView1Layout.setVerticalGroup(
             playerView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 675, Short.MAX_VALUE)
+            .addGap(0, 429, Short.MAX_VALUE)
         );
 
         botonMeetTheMonster.setText("Meet the Monster");
+        botonMeetTheMonster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMeetTheMonsterActionPerformed(evt);
+            }
+        });
 
         botonCombat.setText("Combat");
+        botonCombat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCombatActionPerformed(evt);
+            }
+        });
 
         botonNextTurn.setText("Next Turn");
+        botonNextTurn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNextTurnActionPerformed(evt);
+            }
+        });
+
+        CombatResult.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,38 +106,66 @@ public class NapakalakiView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(botonMeetTheMonster)
-                        .addGap(28, 28, 28)
-                        .addComponent(botonCombat)
-                        .addGap(41, 41, 41)
-                        .addComponent(botonNextTurn)
-                        .addGap(18, 419, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(playerView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(botonMeetTheMonster)
+                                .addGap(30, 30, 30)
+                                .addComponent(botonCombat)
+                                .addGap(32, 32, 32)
+                                .addComponent(botonNextTurn)
+                                .addGap(0, 87, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(playerView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addContainerGap()
+                        .addComponent(CombatResult)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
+                .addComponent(CombatResult)
+                .addGap(77, 77, 77)
                 .addComponent(playerView1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonNextTurn)
                     .addComponent(botonMeetTheMonster)
-                    .addComponent(botonCombat))
-                .addGap(27, 27, 27))
-            .addComponent(monsterView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonCombat)
+                    .addComponent(botonNextTurn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(monsterView1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonMeetTheMonsterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMeetTheMonsterActionPerformed
+        monsterView1.setVisible(true);
+        botonCombat.setEnabled(true);
+        botonMeetTheMonster.setEnabled(false);
+    }//GEN-LAST:event_botonMeetTheMonsterActionPerformed
+
+    private void botonCombatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCombatActionPerformed
+         CombatResult cr = napakalakiModel.developCombat();
+        labelCombatResult.setText(cr.toString());
+        setNapakalaki(napakalakiModel);
+    }//GEN-LAST:event_botonCombatActionPerformed
+
+    private void botonNextTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNextTurnActionPerformed
+        boolean success = napakalakiModel.nextTurn();
+        if(success)
+            setNapakalaki(napakalakiModel);
+    }//GEN-LAST:event_botonNextTurnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CombatResult;
     private javax.swing.JButton botonCombat;
     private javax.swing.JButton botonMeetTheMonster;
     private javax.swing.JButton botonNextTurn;
